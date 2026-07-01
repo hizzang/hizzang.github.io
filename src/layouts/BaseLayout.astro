@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 const {
   title = 'hizzang blog',
   description = '개발, 인프라, 게임 플랫폼 운영 기록을 정리하는 개인 기술 블로그입니다.'
@@ -12,7 +14,6 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="alternate" type="application/rss+xml" title="hizzang blog RSS" href="/rss.xml" />
-    <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
     <header class="site-header">
