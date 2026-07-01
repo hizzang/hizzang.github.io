@@ -6,6 +6,8 @@ const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const getPostUrl = (post) => `/blog/${post.id.replace(/\.md$/, '')}/`;
 ---
 <BaseLayout>
   <section class="container hero">
@@ -32,7 +34,7 @@ const posts = (await getCollection('blog'))
       {posts.map((post) => (
         <article class="post-card">
           <p class="post-meta">{post.data.pubDate.toLocaleDateString('ko-KR')} · {post.data.tags.join(' · ')}</p>
-          <h3><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h3>
+          <h3><a href={getPostUrl(post)}>{post.data.title}</a></h3>
           <p>{post.data.description}</p>
           <div class="tags">{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
         </article>
