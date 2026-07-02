@@ -3,10 +3,19 @@ name: Deploy Astro site to GitHub Pages
 on:
   push:
     branches: [master]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'astro.config.mjs'
+      - 'tsconfig.json'
+      - '.github/workflows/**'
+      - 'design.md'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -40,6 +49,26 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
+
+      - name: Sync build to repository root
+        run: |
+          cp dist/index.html .
+          cp dist/rss.xml .
+          cp dist/favicon.svg public/favicon.svg
+          rm -rf _astro about blog projects games
+          cp -r dist/_astro dist/about dist/blog dist/projects dist/games .
+
+      - name: Commit and push built site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html rss.xml _astro about blog projects games public/favicon.svg
+          if git diff --staged --quiet; then
+            echo "No site changes to deploy"
+          else
+            git commit -m "chore: deploy built site to root"
+            git push
+          fi
 
   deploy:
     runs-on: ubuntu-latest
