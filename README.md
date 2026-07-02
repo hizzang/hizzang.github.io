@@ -1,10 +1,20 @@
-# hizzang blog
+# hizzang — Personal Brand Website
 
-Astro와 GitHub Pages로 운영하는 개인 기술 블로그입니다.
+Astro와 GitHub Pages로 운영하는 개인 브랜드 웹사이트입니다.
 
 ## URL
 
 - https://hizzang.github.io
+
+## 소개
+
+플랫폼 엔지니어링, 인프라, DevOps, 자동화 경험을 소개하고 기록하는 개인 브랜드 사이트입니다.
+
+- **Home** — 브랜드 소개, 전문 영역, 주요 프로젝트, 최근 글
+- **About** — 프로필, 연락처, 일하는 방식
+- **Projects** — 프로젝트 및 작업물
+- **Blog** — 기술 글과 운영 기록
+- **Games** — Chef Defenders 게임 브랜드 사이트 샘플
 
 ## 기술 스택
 
@@ -21,22 +31,22 @@ Astro와 GitHub Pages로 운영하는 개인 기술 블로그입니다.
 ├── .github/workflows/deploy.yml
 ├── astro.config.mjs
 ├── package.json
-├── tsconfig.json
+├── public/
+│   └── favicon.svg
 └── src/
+    ├── data/
+    │   └── site.ts          # 사이트 설정 (이름, 소개, 프로젝트 등)
     ├── content/
-    │   ├── config.ts
     │   └── blog/
-    │       ├── github-pages-astro.md
-    │       └── platform-engineering-notes.md
     ├── layouts/
     │   └── BaseLayout.astro
     ├── pages/
-    │   ├── index.astro
+    │   ├── index.astro      # 홈 (브랜드 랜딩)
     │   ├── about.astro
-    │   ├── rss.xml.js
-    │   └── blog/
-    │       ├── index.astro
-    │       └── [...slug].astro
+    │   ├── projects/
+    │   ├── blog/
+    │   ├── games/
+    │   └── rss.xml.js
     └── styles/
         └── global.css
 ```
@@ -55,6 +65,10 @@ npm run build
 npm run preview
 ```
 
+## 사이트 정보 수정
+
+`src/data/site.ts`에서 이름, 소개, 전문 영역, 프로젝트, 소셜 링크 등을 수정할 수 있습니다.
+
 ## 글 추가 방법
 
 `src/content/blog/` 아래에 Markdown 파일을 추가합니다.
@@ -72,12 +86,3 @@ draft: false
 ```
 
 `master` 브랜치에 push하면 GitHub Actions가 Astro 사이트를 빌드하고 GitHub Pages에 배포합니다.
-
-## 향후 개선 후보
-
-- 태그별 글 목록
-- 검색 기능
-- Giscus 댓글
-- 다크 모드
-- 코드 하이라이트 테마
-- 커스텀 도메인

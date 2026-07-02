@@ -1,9 +1,11 @@
 ---
 import '../styles/global.css';
+import { site } from '../data/site';
 
 const {
-  title = 'hizzang blog',
-  description = '개발, 인프라, 게임 플랫폼 운영 기록을 정리하는 개인 기술 블로그입니다.'
+  title = site.title,
+  description = site.description,
+  variant = 'default'
 } = Astro.props;
 ---
 <!doctype html>
@@ -13,19 +15,27 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="alternate" type="application/rss+xml" title="hizzang blog RSS" href="/rss.xml" />
+    <meta name="author" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={site.url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} RSS`} href="/rss.xml" />
+    <link rel="me" href={site.social.github} />
   </head>
-  <body>
+  <body class={variant === 'game' ? 'page-game' : ''}>
     <header class="site-header">
       <nav class="nav">
-        <a class="brand" href="/">hizzang blog</a>
+        <a class="brand" href="/">
+          <span class="brand-mark">h</span>
+          <span class="brand-text">{site.name}</span>
+        </a>
         <div class="nav-links">
-          <a href="/">Home</a>
-          <a href="/blog/">Blog</a>
-          <a href="/games/chef-defenders/">Games</a>
-          <a href="/about/">About</a>
-          <a href="/rss.xml">RSS</a>
-          <a href="https://github.com/hizzang" rel="me">GitHub</a>
+          {site.nav.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+          <a class="nav-cta" href={site.social.github} rel="me">GitHub</a>
         </div>
       </nav>
     </header>
@@ -33,7 +43,20 @@ const {
       <slot />
     </main>
     <footer class="site-footer">
-      <p>© {new Date().getFullYear()} hizzang. Powered by Astro and GitHub Pages.</p>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <strong>{site.name}</strong>
+          <p>{site.tagline}</p>
+        </div>
+        <div class="footer-links">
+          {site.nav.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+          <a href={site.social.github} rel="me">GitHub</a>
+          <a href={site.social.rss}>RSS</a>
+        </div>
+      </div>
+      <p class="footer-copy">© {new Date().getFullYear()} {site.name}. Powered by Astro and GitHub Pages.</p>
     </footer>
   </body>
 </html>
