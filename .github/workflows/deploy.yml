@@ -55,14 +55,14 @@ jobs:
           cp dist/index.html .
           cp dist/rss.xml .
           cp dist/favicon.svg public/favicon.svg
-          rm -rf _astro about blog projects games
-          cp -r dist/_astro dist/about dist/blog dist/projects dist/games .
+          rm -rf _astro about blog projects games ko en ja
+          cp -r dist/_astro dist/about dist/blog dist/projects dist/games dist/ko dist/en dist/ja .
 
       - name: Commit and push built site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html rss.xml _astro about blog projects games public/favicon.svg
+          git add index.html rss.xml _astro about blog projects games ko en ja public/favicon.svg
           if git diff --staged --quiet; then
             echo "No site changes to deploy"
           else
