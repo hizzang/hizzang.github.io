@@ -85,4 +85,20 @@ draft: false
 본문을 Markdown으로 작성합니다.
 ```
 
+## 배포
+
 `master` 브랜치에 push하면 GitHub Actions가 Astro 사이트를 빌드하고 GitHub Pages에 배포합니다.
+
+### GitHub Pages 설정 (최초 1회)
+
+Pages 소스가 **GitHub Actions**로 설정되어 있어야 Astro 빌드 결과가 라이브 사이트에 반영됩니다.
+
+```bash
+gh api --method PUT repos/hizzang/hizzang.github.io/pages -f build_type=workflow
+```
+
+또는 GitHub 저장소 → **Settings** → **Pages** → **Build and deployment** → **Source** → **GitHub Actions** 선택.
+
+### 디자인 시스템
+
+Spotify에서 영감을 받은 다크 테마 가이드는 [`design.md`](./design.md)를 참고하세요.
