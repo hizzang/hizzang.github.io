@@ -87,17 +87,28 @@ draft: false
 
 ## 배포
 
-`master` 브랜치에 push하면 GitHub Actions가 Astro 사이트를 빌드하고 GitHub Pages에 배포합니다.
+`master` 브랜치에 push하면 GitHub Actions가 Astro 사이트를 빌드하고 `gh-pages` 브랜치에 배포합니다.
 
 ### GitHub Pages 설정 (최초 1회)
 
-Pages 소스가 **GitHub Actions**로 설정되어 있어야 Astro 빌드 결과가 라이브 사이트에 반영됩니다.
+Pages 소스를 **`gh-pages` 브랜치**로 설정해야 배포 결과가 라이브 사이트에 반영됩니다.
+
+**방법 A — GitHub UI**
+
+1. 저장소 → **Settings** → **Pages**
+2. **Build and deployment** → **Source** → **Deploy from a branch**
+3. Branch: **`gh-pages`** / **`/ (root)`** 선택 → Save
+
+**방법 B — CLI**
 
 ```bash
-gh api --method PUT repos/hizzang/hizzang.github.io/pages -f build_type=workflow
+gh api --method PUT repos/hizzang/hizzang.github.io/pages \
+  -f build_type=legacy \
+  -f 'source[branch]=gh-pages' \
+  -f 'source[path]=/'
 ```
 
-또는 GitHub 저장소 → **Settings** → **Pages** → **Build and deployment** → **Source** → **GitHub Actions** 선택.
+또는 Actions 배포를 사용하려면 Source를 **GitHub Actions**로 선택합니다.
 
 ### 디자인 시스템
 
