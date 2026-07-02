@@ -1,5 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+import { site } from '../data/site';
 
 export async function GET(context) {
   const posts = (await getCollection('blog'))
@@ -7,8 +8,8 @@ export async function GET(context) {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return rss({
-    title: 'hizzang blog',
-    description: '개발, 인프라, 게임 플랫폼 운영 기록을 정리하는 개인 기술 블로그입니다.',
+    title: site.name,
+    description: site.description,
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,
