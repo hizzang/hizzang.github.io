@@ -9,10 +9,10 @@
   --text-bright: #cbcbcb;
   --text-emphasis: #fdfdfd;
   --line: #282828;
-  --accent: #1ed760;
-  --accent-border: #1db954;
-  --accent-soft: rgba(30, 215, 96, 0.12);
-  --accent-glow: rgba(30, 215, 96, 0.35);
+  --accent: #e91429;
+  --accent-border: #c11020;
+  --accent-soft: rgba(233, 20, 41, 0.12);
+  --accent-glow: rgba(233, 20, 41, 0.35);
   --text-negative: #f3727f;
   --text-warning: #ffa42b;
   --text-announcement: #539df5;
@@ -79,7 +79,7 @@ a:hover { color: var(--accent); }
   height: 32px;
   border-radius: 50%;
   background: var(--accent);
-  color: #000000;
+  color: #ffffff;
   font-weight: 700;
   font-size: 16px;
 }
@@ -97,15 +97,15 @@ a:hover { color: var(--accent); }
   padding: 8px 20px;
   border-radius: 9999px;
   background: var(--accent);
-  color: #000000 !important;
+  color: #ffffff !important;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 1.4px;
   text-transform: uppercase;
 }
 .nav-cta:hover {
-  background: #1fdf64;
-  color: #000000 !important;
+  background: #ff3344;
+  color: #ffffff !important;
   transform: scale(1.04);
 }
 
@@ -130,7 +130,7 @@ a:hover { color: var(--accent); }
   font-size: 14px;
   white-space: nowrap;
 }
-.text-link:hover { color: #1fdf64; }
+.text-link:hover { color: #ff3344; }
 .text-accent { color: var(--accent); }
 
 .brand-hero {
@@ -144,7 +144,7 @@ a:hover { color: var(--accent); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(30, 215, 96, 0.06), transparent 40%),
+    radial-gradient(circle at 20% 30%, rgba(233, 20, 41, 0.08), transparent 40%),
     radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03), transparent 35%);
 }
 
@@ -191,13 +191,13 @@ a:hover { color: var(--accent); }
 }
 .btn:hover { transform: scale(1.04); }
 .btn-primary {
-  color: #000000;
+  color: #ffffff;
   background: var(--accent);
   box-shadow: var(--shadow);
 }
 .btn-primary:hover {
-  color: #000000;
-  background: #1fdf64;
+  color: #ffffff;
+  background: #ff3344;
 }
 .btn-secondary {
   color: var(--text);
@@ -234,7 +234,7 @@ a:hover { color: var(--accent); }
   height: 72px;
   border-radius: 50%;
   background: var(--accent);
-  color: #000000;
+  color: #ffffff;
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -487,7 +487,7 @@ h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
 .article h1 { font-size: clamp(34px, 5vw, 56px); color: var(--text); }
 .article p, .article li { color: var(--text-bright); }
 .article a { color: var(--accent); }
-.article a:hover { color: #1fdf64; }
+.article a:hover { color: #ff3344; }
 .article code {
   background: var(--surface-mid);
   border: none;

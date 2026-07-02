@@ -9,12 +9,12 @@
 
 Spotify의 웹 인터페이스는 거의 검은색(`#121212`, `#181818`, `#1f1f1f`) 코쿤 안에 청취자를 감싸는 몰입형 다크 뮤직 플레이어입니다. 앨범 아트와 콘텐츠가 주요 색상 원천이 되며, UI는 그림자 속으로 물러납니다.
 
-개인 브랜드 사이트에서는 **프로젝트 썸네일, 아이콘, 프로필 아바타**가 앨범 아트 역할을 합니다. UI 자체는 무채색이며, Spotify Green(`#1ed760`)은 CTA·활성 상태·강조 링크에만 사용합니다.
+개인 브랜드 사이트에서는 **프로젝트 썸네일, 아이콘, 프로필 아바타**가 앨범 아트 역할을 합니다. UI 자체는 무채색이며, Brand Red(`#e91429`)는 CTA·활성 상태·강조 링크에만 사용합니다.
 
 **핵심 특성**
 
 - Near-black 몰입형 다크 테마 (`#121212`–`#1f1f1f`)
-- Spotify Green (`#1ed760`) — 기능적 강조에만 사용
+- Brand Red (`#e91429`) — 기능적 강조에만 사용
 - Pill 버튼 (500px–9999px) + 원형 컨트롤 (50%)
 - 버튼 라벨: uppercase + 넓은 letter-spacing (1.4px–2px)
 - 다크 배경용 무거운 그림자 (`rgba(0,0,0,0.3–0.5)`)
@@ -31,8 +31,9 @@ Spotify의 웹 인터페이스는 거의 검은색(`#121212`, `#181818`, `#1f1f1
 | `--bg` | `#121212` | 페이지 최하단 배경 |
 | `--surface` | `#181818` | 카드, 컨테이너 |
 | `--surface-mid` | `#1f1f1f` | 버튼, 인터랙티브 표면 |
-| `--accent` | `#1ed760` | CTA, 활성 상태, 강조 |
-| `--accent-border` | `#1db954` | Green accent border |
+| `--accent` | `#e91429` | CTA, 활성 상태, 강조 |
+| `--accent-border` | `#c11020` | Red accent border |
+| `--accent-hover` | `#ff3344` | Hover 상태 |
 
 ### Text
 
@@ -113,9 +114,10 @@ SpotifyMixUI / CircularSp는 프로prietary 폰트이므로, 동일한 fallback 
 
 ### Buttons
 
-**Primary Pill (Green CTA)**
-- Background: `#1ed760`
-- Text: `#000000`
+**Primary Pill (Red CTA)**
+- Background: `#e91429`
+- Hover: `#ff3344`
+- Text: `#ffffff`
 - Padding: 8px 32px
 - Radius: 9999px
 - Font: 14px, weight 700, uppercase, letter-spacing 1.4px
@@ -156,15 +158,15 @@ SpotifyMixUI / CircularSp는 프로prietary 폰트이므로, 동일한 fallback 
 - Header background: `#121212` (sticky)
 - Active items: 14px weight 700, `#ffffff`
 - Inactive: 14px weight 400, `#b3b3b3`
-- Brand mark: circular, `#1ed760` background, `#000000` text
-- CTA pill: Green primary
+- Brand mark: circular, `#e91429` background, `#ffffff` text
+- CTA pill: Red primary
 
 ### Profile Card (Hero)
 
 - Background: `#181818`
 - Radius: 8px
 - Shadow: `--shadow-lg`
-- Avatar: circular (50%), `#1ed760` background
+- Avatar: circular (50%), `#e91429` background
 - Highlight stats: `#252525` nested cards
 
 ---
@@ -209,7 +211,7 @@ SpotifyMixUI / CircularSp는 프로prietary 폰트이므로, 동일한 fallback 
 
 ### Home (`index.astro`)
 - Hero: full-width dark immersive, no gradient color — achromatic only
-- Green accent on hero headline span and primary buttons only
+- Red accent on hero headline span and primary buttons only
 - Profile card as elevated surface
 
 ### About / Projects / Blog
@@ -237,7 +239,7 @@ SpotifyMixUI / CircularSp는 프로prietary 폰트이므로, 동일한 fallback 
 ### Do
 
 - Near-black 배경 (`#121212`–`#1f1f1f`) 사용
-- Green은 CTA·활성 상태·강조에만
+- Red는 CTA·활성 상태·강조에만
 - 모든 버튼 pill 형태
 - 버튼 uppercase + letter-spacing 1.4px
 - 다크 배경에 무거운 그림자
@@ -245,7 +247,7 @@ SpotifyMixUI / CircularSp는 프로prietary 폰트이므로, 동일한 fallback 
 
 ### Don't
 
-- Green을 배경이나 장식에 사용하지 않음
+- Red를 배경이나 장식에 사용하지 않음
 - 라이트 배경을 주요 surface로 사용하지 않음
 - 사각 버튼 사용하지 않음
 - 얇은 그림자 — 다크에서 보이지 않음
@@ -262,7 +264,8 @@ Interactive: #1f1f1f
 Card hover:  #252525
 Text:        #ffffff
 Secondary:   #b3b3b3
-Accent:      #1ed760
+Accent:      #e91429
+Accent hover:#ff3344
 Border:      #7c7c7c
 Error:       #f3727f
 ```
@@ -271,5 +274,5 @@ Error:       #f3727f
 
 - "Create a dark card: #181818 background, 8px radius. Title 16px weight 700 white. Subtitle 14px weight 400 #b3b3b3. Shadow on hover."
 - "Design a pill button: #1f1f1f background, white text, 9999px radius, uppercase 1.4px tracking."
-- "Build a circular avatar: #1ed760 background, #000000 text, 50% radius."
+- "Build a circular avatar: #e91429 background, #ffffff text, 50% radius."
 - "Design navigation: #121212 background. Active 700 white, inactive 400 #b3b3b3."
