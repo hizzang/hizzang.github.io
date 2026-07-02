@@ -1,28 +1,14 @@
 ---
-import { getCollection, render, type CollectionEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { site } from '../../data/site';
+import { getCollection } from 'astro:content';
+import { defaultLocale } from '../../i18n';
 
 export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
   return posts.map((post) => ({
-    params: { slug: post.id.replace('.md', '') },
-    props: { post }
+    params: { slug: post.id.replace('.md', '') }
   }));
 }
 
-type Props = { post: CollectionEntry<'blog'> };
-const { post } = Astro.props;
-const { Content } = await render(post);
+const { slug } = Astro.params;
+return Astro.redirect(`/${defaultLocale}/blog/${slug}/`);
 ---
-<BaseLayout title={`${post.data.title} | ${site.name}`} description={post.data.description}>
-  <section class="container">
-    <article class="article">
-      <p class="post-meta">{post.data.pubDate.toLocaleDateString('ko-KR')} · {post.data.tags.join(' · ')}</p>
-      <h1>{post.data.title}</h1>
-      <p>{post.data.description}</p>
-      <div class="tags">{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
-      <Content />
-    </article>
-  </section>
-</BaseLayout>

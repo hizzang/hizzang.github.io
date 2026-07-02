@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+import {
+  getStaticLangPaths,
+  getTranslations,
+  isLocale,
+  localizeProjectHref,
+  type Locale
+} from '../../../i18n';
+
+export function getStaticPaths() {
+  return getStaticLangPaths();
+}
+
+const { lang } = Astro.params;
+if (!lang || !isLocale(lang)) {
+  throw new Error(`Invalid locale: ${lang}`);
+}
+
+const locale = lang as Locale;
+const t = getTranslations(locale);
+---
+<BaseLayout lang={locale} title={`Projects | ${site.name}`} description={t.projects.lead}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">{t.projects.eyebrow}</p>
+      <h1>{t.projects.title}</h1>
+      <p class="lead">{t.projects.lead}</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="project-list">
+      {t.site.projects.map((project) => (
+        <a class="card project-card-large" href={localizeProjectHref(locale, project.href)}>
+          <div class="project-card-header">
+            <p class="project-category">{project.category}</p>
+            {project.featured && <span class="tag tag-featured">{t.common.featured}</span>}
+          </div>
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div class="tags">
+            {project.tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

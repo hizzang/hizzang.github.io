@@ -4,7 +4,21 @@ Astro와 GitHub Pages로 운영하는 개인 브랜드 웹사이트입니다.
 
 ## URL
 
-- https://hizzang.github.io
+- https://hizzang.github.io/ko/ (한국어, 기본)
+- https://hizzang.github.io/en/ (English)
+- https://hizzang.github.io/ja/ (日本語)
+
+## i18n
+
+한국어(ko), English(en), 日本語(ja) 3개 언어를 지원합니다. URL prefix(`/ko/`, `/en/`, `/ja/`)로 언어가 구분되며, 헤더의 언어 스위처로 전환할 수 있습니다.
+
+| 언어 | 폰트 |
+|------|------|
+| 한국어 | Noto Sans KR |
+| English | Inter |
+| 日本語 | Noto Sans JP |
+
+번역 파일: `src/i18n/locales/`
 
 ## 소개
 

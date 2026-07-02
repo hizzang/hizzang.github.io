@@ -1,15 +1,33 @@
 ---
 import '../styles/global.css';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import { site } from '../data/site';
+import {
+  getTranslations,
+  htmlLang,
+  localeFonts,
+  localizedPath,
+  locales,
+  switchLocalePath,
+  type Locale
+} from '../i18n';
 
-const {
-  title = site.title,
-  description = site.description,
-  variant = 'default'
-} = Astro.props;
+interface Props {
+  lang: Locale;
+  title?: string;
+  description?: string;
+  variant?: 'default' | 'game';
+}
+
+const { lang, variant = 'default' } = Astro.props;
+const t = getTranslations(lang);
+const title = Astro.props.title ?? t.meta.title;
+const description = Astro.props.description ?? t.meta.description;
+const fonts = localeFonts[lang];
+const currentPath = Astro.url.pathname;
 ---
 <!doctype html>
-<html lang="ko">
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,23 +37,34 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={site.url} />
+    <meta property="og:url" content={`${site.url}${currentPath}`} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title={`${site.name} RSS`} href="/rss.xml" />
     <link rel="me" href={site.social.github} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={fonts.googleFonts} rel="stylesheet" />
+    {locales.map((locale) => (
+      <link
+        rel="alternate"
+        hreflang={htmlLang[locale]}
+        href={`${site.url}${switchLocalePath(currentPath, locale)}`}
+      />
+    ))}
   </head>
-  <body class={variant === 'game' ? 'page-game' : ''}>
+  <body class={variant === 'game' ? 'page-game' : ''} style={`--font-ui: ${fonts.family}; --font-title: ${fonts.family};`}>
     <header class="site-header">
       <nav class="nav">
-        <a class="brand" href="/">
+        <a class="brand" href={localizedPath(lang, '/')}>
           <span class="brand-mark">h</span>
           <span class="brand-text">{site.name}</span>
         </a>
         <div class="nav-links">
-          {site.nav.map((item) => (
-            <a href={item.href}>{item.label}</a>
+          {site.navItems.map((item) => (
+            <a href={localizedPath(lang, item.path)}>{t.nav[item.id]}</a>
           ))}
-          <a class="nav-cta" href={site.social.github} rel="me">GitHub</a>
+          <LanguageSwitcher lang={lang} currentPath={currentPath} />
+          <a class="nav-cta" href={site.social.github} rel="me">{t.nav.github}</a>
         </div>
       </nav>
     </header>
@@ -46,17 +75,17 @@ const {
       <div class="footer-inner">
         <div class="footer-brand">
           <strong>{site.name}</strong>
-          <p>{site.tagline}</p>
+          <p>{t.site.tagline}</p>
         </div>
         <div class="footer-links">
-          {site.nav.map((item) => (
-            <a href={item.href}>{item.label}</a>
+          {site.navItems.map((item) => (
+            <a href={localizedPath(lang, item.path)}>{t.nav[item.id]}</a>
           ))}
-          <a href={site.social.github} rel="me">GitHub</a>
+          <a href={site.social.github} rel="me">{t.nav.github}</a>
           <a href={site.social.rss}>RSS</a>
         </div>
       </div>
-      <p class="footer-copy">© {new Date().getFullYear()} {site.name}. Powered by Astro and GitHub Pages.</p>
+      <p class="footer-copy">© {new Date().getFullYear()} {site.name}. {t.footer.poweredBy}</p>
     </footer>
   </body>
 </html>

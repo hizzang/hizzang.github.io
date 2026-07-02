@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+import {
+  getStaticLangPaths,
+  getTranslations,
+  isLocale,
+  localizedPath,
+  type Locale
+} from '../../i18n';
+
+export function getStaticPaths() {
+  return getStaticLangPaths();
+}
+
+const { lang } = Astro.params;
+if (!lang || !isLocale(lang)) {
+  throw new Error(`Invalid locale: ${lang}`);
+}
+
+const locale = lang as Locale;
+const t = getTranslations(locale);
+---
+<BaseLayout lang={locale} title={`About | ${site.name}`} description={t.site.longBio}>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">{t.about.eyebrow}</p>
+      <h1>{site.name}</h1>
+      <p class="lead">{t.site.longBio}</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="about-grid">
+      <div class="card about-card">
+        <h3>{t.about.role}</h3>
+        <p class="about-role">{t.site.role}</p>
+        <p>{t.site.bio}</p>
+      </div>
+      <div class="card about-card">
+        <h3>{t.about.contact}</h3>
+        <ul class="about-list">
+          <li>
+            <span>{t.about.contactGithub}</span>
+            <a href={site.social.github} rel="me">{site.social.github.replace('https://', '')}</a>
+          </li>
+          <li>
+            <span>{t.about.contactEmail}</span>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <span>{t.about.contactLocation}</span>{t.site.location}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-header">
+      <p class="eyebrow">{t.about.valuesEyebrow}</p>
+      <h2>{t.about.valuesTitle}</h2>
+    </div>
+    <div class="grid values-grid">
+      {t.site.values.map((value) => (
+        <div class="card value-card">
+          <h3>{value.title}</h3>
+          <p>{value.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-header">
+      <p class="eyebrow">{t.about.expertiseEyebrow}</p>
+      <h2>{t.about.expertiseTitle}</h2>
+    </div>
+    <div class="grid expertise-grid">
+      {t.site.expertise.map((item) => (
+        <div class="card expertise-card">
+          <span class="expertise-icon">{item.icon}</span>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

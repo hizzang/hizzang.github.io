@@ -24,8 +24,22 @@
   --shadow: rgba(0, 0, 0, 0.3) 0px 8px 8px;
   --shadow-lg: rgba(0, 0, 0, 0.5) 0px 8px 24px;
   --shadow-inset: rgb(18, 18, 18) 0px 1px 0px, rgb(124, 124, 124) 0px 0px 0px 1px inset;
-  --font-ui: "Helvetica Neue", helvetica, arial, "Noto Sans KR", "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN", Meiryo, "MS Gothic", sans-serif;
+  --font-ui: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --font-title: var(--font-ui);
+}
+
+html[lang='ko'] {
+  --font-ui: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  --font-title: var(--font-ui);
+}
+
+html[lang='en'] {
+  --font-ui: "Inter", "Helvetica Neue", helvetica, arial, sans-serif;
+  --font-title: var(--font-ui);
+}
+
+html[lang='ja'] {
+  --font-ui: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   --font-title: var(--font-ui);
 }
 
@@ -86,11 +100,13 @@ a:hover { color: var(--accent); }
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
   color: var(--muted);
   font-size: 14px;
   font-weight: 400;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 .nav-links a:hover { color: var(--text); }
 .nav-cta {
